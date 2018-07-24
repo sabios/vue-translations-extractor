@@ -1,0 +1,1 @@
+# vue-translations-extractor
