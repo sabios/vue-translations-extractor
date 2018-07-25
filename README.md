@@ -7,7 +7,7 @@ Project goal is to get words into the attributes and functions of vue files to s
 
 ## Installation
 ```
-npm install vue-translations-extractor
+npm install @sabios/vue-translations-extractor
 ```
 
 ## Usage
