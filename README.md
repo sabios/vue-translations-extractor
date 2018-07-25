@@ -12,7 +12,7 @@ npm install @sabios/vue-translations-extractor
 
 ## Usage
 ```
-$ node node_modules/vue-translations-extractor -o TEMPLATE.pot -s SOURCE -s ANOTHER_SOURCE
+$ node ./node_modules/@sabios/vue-translations-extractor -o TEMPLATE.pot -s SOURCE -s ANOTHER_SOURCE
 ```
 * TEMPLATE.pot: location of template.pot file
 * SOURCE/ANOTHER_SOURCE: src of vue files
