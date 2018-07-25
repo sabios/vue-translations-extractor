@@ -3,22 +3,22 @@ const SAXParser = require('parse5-sax-parser')
 const Readable = require('stream').Readable
 
 const SELF_CLOSING_TAGS = [
-	'area',
-	'base',
-	'br',
-	'col',
-	'command',
-	'embed',
-	'hr',
-	'img',
-	'input',
-	'keygen',
-	'link',
-	'meta',
-	'param',
-	'source',
-	'track',
-	'wbr'
+  'area',
+  'base',
+  'br',
+  'col',
+  'command',
+  'embed',
+  'hr',
+  'img',
+  'input',
+  'keygen',
+  'link',
+  'meta',
+  'param',
+  'source',
+  'track',
+  'wbr'
 ]
 
 const parseVueFile = (filename) => {
