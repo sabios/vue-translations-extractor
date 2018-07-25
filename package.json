@@ -31,10 +31,10 @@
     "node": ">=0.8.0"
   },
   "dependencies": {
-    "gettext-extractor": "^3.3.2",
-    "multi-glob": "^1.0.1",
-    "parse5-sax-parser": "^5.0.0",
-    "queue": "^4.4.2",
-    "yargs": "^12.0.1"
+    "gettext-extractor": "3.3.2",
+    "multi-glob": "1.0.1",
+    "parse5-sax-parser": "5.0.0",
+    "queue": "4.4.2",
+    "yargs": "12.0.1"
   }
 }
