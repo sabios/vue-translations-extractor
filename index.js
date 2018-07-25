@@ -1,9 +1,7 @@
-const fs = require('fs')
-const path = require('path')
+const glob = require("multi-glob").glob
 const queue = require('queue')
-const glob = require('multi-glob').glob
-const VueParser = require('./vue-parser')
 const Extractor = require('./extractor')
+const VueParser = require('./vue-parser')
 
 const argv = require('yargs')
   .alias('output', 'o')
@@ -14,57 +12,40 @@ const argv = require('yargs')
   .argv
 
 const outputFile = argv.output
-let srcFolders = !Array.isArray(argv.src) ? [argv.src] : argv.src
+const srcFolders = !Array.isArray(argv.src) ? [argv.src] : argv.src
 
-const { extractor, parserJS, parserHTML } = Extractor.init(srcFolders)
-
-const getVueSrcFiles = () => srcFolders.map(src => `${src}/**/*.vue`)
+const { extractor, parserJS, parserHTML } = Extractor.init(srcFolders, outputFile)
 
 const q = queue({
   concurrency: 1
 })
 
-const parseString = (parser, snippet, filename) => {
-  parser.parseString(snippet.code, filename, {
-    lineNumberStart: snippet.line
-  })
-}
+const getVueFilesPatterns = () => srcFolders.map(src => `${src}/**/*.vue`)
 
-const syncTemplatePot = () => {
-  let outputFolder = path.dirname(outputFile)
-
-  if (!fs.existsSync(outputFolder)) {
-    fs.mkdirSync(outputFolder)
-  }
-  fs.writeFileSync(outputFile, '')
-
-  extractor.savePotFile(outputFile)
-  extractor.printStats()
-}
-
-glob(getVueSrcFiles(), (err, files) => {
+glob(getVueFilesPatterns(), (err, files) => {
   if (!err) {
     files.map((filename) => {
-      q.push(async (cb) => {
-        const snippets = await VueParser.parseVueFile(filename)
+      q.push((cb) => {
+        // console.log("parsing " + filename)
+        VueParser.parseVueFile(filename).then((snippets) => {
+          for (let i = 0; i < snippets.length; i++) {
+            parserJS.parseString(snippets[i].code, filename, {
+              lineNumberStart: snippets[i].line
+            })
+            parserHTML.parseString(snippets[i].code, filename, {
+              lineNumberStart: snippets[i].line
+            })
+          }
 
-        for (let i = 0; i < snippets.length; i++) {
-          parseString(parserJS, snippets[i], filename)
-          parseString(parserHTML, snippets[i], filename)
-        }
-
-        cb()
+          cb()
+        })
       })
     })
 
     q.start((err) => {
       if (!err) {
-        syncTemplatePot()
-      } else {
-        console.error(err)
+        extractor.syncTemplatePot()
       }
     })
-  } else {
-    console.error(err)
   }
 })
