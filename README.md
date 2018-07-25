@@ -1,5 +1,7 @@
 # vue-translations-extractor
 
+[NPM](https://www.npmjs.com/package/vue-translations-extractor)
+
 ## Introduction
 Project goal is to get words into the attributes and functions of vue files to send to a template pot file
 

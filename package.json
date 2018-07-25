@@ -1,6 +1,6 @@
 {
   "name": "vue-translations-extractor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "extract words into vue files to send to a template pot file",
   "main": "index.js",
   "scripts": {
