@@ -15,15 +15,14 @@ const init = (srcFolders) => {
       })
     ])
     .parseFilesGlob(`(${srcFolders.join('|')})/**/*.js`)
-    .parseFilesGlob(`(${srcFolders.join('|')})/**/*.vue`)
 
   const parserHTML = extractor
     .createHtmlParser([
       // Place all the possible expressions to extract here:
       HtmlExtractors.elementAttribute('[v-translate]', 'v-translate'),
     ])
-    .parseFilesGlob(`(${srcFolders.join('|')})/**/*.vue`)
-    .parseFilesGlob(`(${srcFolders.join('|')})/**/*.html`)
+    .parseFilesGlob(`src/**/*.html`)
+    .parseFilesGlob(`src/**/*.vue`)
 
   return { extractor, parserJS, parserHTML }
 }
