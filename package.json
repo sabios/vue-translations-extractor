@@ -1,6 +1,6 @@
 {
   "name": "@sabios/vue-translations-extractor",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "extract words into vue files to send to a template pot file",
   "main": "index.js",
   "scripts": {
