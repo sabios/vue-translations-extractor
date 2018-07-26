@@ -22,6 +22,7 @@ const init = (srcFolders, outputFile) => {
     .createHtmlParser([
       // Place all the possible expressions to extract here:
       HtmlExtractors.elementAttribute('[v-translate]', 'v-translate'),
+      HtmlExtractors.elementAttribute('[v-t]', 'v-t')
     ])
 
   for (let src of srcFolders) {
